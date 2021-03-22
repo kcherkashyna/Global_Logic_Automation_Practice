@@ -8,5 +8,4 @@ public class MyAccountPage {
     public void checkAccountIsCreated() {
         $(".page-heading").shouldHave(text("MY ACCOUNT"));
     }
-
 }

@@ -6,7 +6,7 @@ import pages.AuthenticationPage;
 import pages.MyAccountPage;
 import pages.StoreMainPage;
 
-public class LoginSelenideTest {
+public class LoginTest {
 
     private final static String TESTDATA = "DataProvider";
 
@@ -30,7 +30,7 @@ public class LoginSelenideTest {
         };
     }
 
-    @Test (dataProvider = TESTDATA)
+    @Test(dataProvider = TESTDATA)
     private void userCanSignIn(final String email, final String password) {
 
         StoreMainPage storeMainPage = new StoreMainPage();

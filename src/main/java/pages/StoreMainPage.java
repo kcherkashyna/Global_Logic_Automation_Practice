@@ -5,16 +5,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class StoreMainPage {
 
-  public void openSite() {
-    open("http://automationpractice.com/index.php");
-  }
+    public void openSite() {
+        open("http://automationpractice.com/index.php");
+    }
 
-  public void clickOnSignIn() {
-    $(".login").click();
-  }
+    public void clickOnSignIn() {
+        $(".login").click();
+    }
 
-  public void clickOnSignOut() {
-    $(".logout").click();
-  }
+    public void clickOnSignOut() {
+        $(".logout").click();
+    }
 
 }
