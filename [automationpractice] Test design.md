@@ -17,16 +17,15 @@ Non-Functional Requirements:
 
 ### Test Scenario Positive
 
-| # |       emailAddress        |           password               |
-| - | ------------------------- | -------------------------------- |
-| 1 | onlyletters@gmail.com     | 1234567890                       |
-| 2 | 000777333111222@gmail.com | 1234567890                       |
-| 3 | user_&333@gmail.com       | 1_&345                           |
-| 4 | CAPITALLETTERS@gmail.com  | ABCDE                            |
-| 5 | long_email_12345678901234
-5678901234567890123456789012345
-6789012345678901234567890123456
-78901234567890123@gmail.com     | 12345678901234567890123456789012 |            
+| # |               emailAddress             |           password               |
+| - | -------------------------------------- | -------------------------------- |
+| 1 | emailcontainsonlyletters@gmail.com     | passwordwithonlyletters          |
+| 2 | 000777333111222777333@gmail.com        | 1234567890                       |
+| 3 | user_&#!777@gmail.com                  | 1_&#!67890                       |
+| 4 | EMAILCONTAINSCAPITALLETTERS@gmail.com  | ABCDE                            |
+| 5 | long_email_123456789012345678901234567
+89012345678901234567890123456789012345678901
+2345678901234567890124@gmail.com             | 12345678901234567890123456789012 |            
 
 ### Test Scenario Negative
 
@@ -72,11 +71,9 @@ When User enters <emailAddress> in the "Email address" field located in "Already
 Then User should see the "My account" page
 ```
 
-**3** User should be able to add a product to card
+**3** User should be able to add a product to cart
 ```gherkin
 Given "http://automationpractice.com/index.php" site is opened
-    And User should be already registered
-    And User should be already signed in
 When User clicks on the "Printed Chiffon Dress" product
     And User clicks on the "Add to cart" button
     And window with text "Product successfully added to the shopping cart" is opened
@@ -85,11 +82,9 @@ When User clicks on the "Printed Chiffon Dress" product
 Then "Printed Chiffon Dress" product is in the cart
 ```
 
-**4** User should be able to add a product to card
+**4** User should be able to search for product
 ```gherkin
 Given "http://automationpractice.com/index.php" site is opened
-    And User should be already registered
-    And User should be already signed in
 When User enters "blouse" text in the "Search" searchfield
 Then User sees one "Blouse" showing in the results
 ```
