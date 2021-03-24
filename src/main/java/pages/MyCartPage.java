@@ -13,6 +13,7 @@ public class MyCartPage {
     }
 
     public void checkRightProductIsAdded() {
+        //update locator . replace get(2)
         $$(By.xpath("//*[@class='product-name']//*[contains(@href,'id_product')]")).get(2).shouldHave(text("Printed Chiffon Dress"));
         $(".cart_ref").shouldHave(text("demo_7"));
     }
