@@ -1,7 +1,7 @@
 package test;
 
 import org.testng.annotations.DataProvider;
-
+//Data provider should not be in test package
 public class DataProviderClass {
 
     public static final String TESTDATA = "DataProvider";
