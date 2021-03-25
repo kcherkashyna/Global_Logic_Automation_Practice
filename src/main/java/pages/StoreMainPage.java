@@ -7,7 +7,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class StoreMainPage {
-
+    
+    //As this is initial action this should not be in page 
+    // this is configuration. Think on that where you may put open site and other browser configuration actions. 
     public void openSite() {
         open("http://automationpractice.com/index.php");
     }
