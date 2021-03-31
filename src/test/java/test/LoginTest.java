@@ -1,32 +1,40 @@
 package test;
 
+import actions.ConfigurationAction;
+import actions.LoginAction;
 import org.testng.annotations.Test;
-import pages.AuthenticationPage;
-import pages.MyAccountPage;
-import pages.StoreMainPage;
+import utils.DataProviderLogin;
 
-import static test.DataProviderClass.TESTDATA;
+import static utils.DataProviderLogin.TESTDATA1;
+import static utils.DataProviderLogin.TESTDATA2;
 
 public class LoginTest {
 
-    @Test(dataProvider = TESTDATA, dataProviderClass = DataProviderClass.class)
+    ConfigurationAction configurationAction = new ConfigurationAction();
+    LoginAction loginAction = new LoginAction();
 
-    private void userCanSignIn(final String email, final String password) {
+    @Test(dataProvider = TESTDATA1, dataProviderClass = DataProviderLogin.class)
+    private void userSignIn1(final String email, final String password) {
 
-        StoreMainPage storeMainPage = new StoreMainPage();
-        AuthenticationPage authenticationPage = new AuthenticationPage();
-        MyAccountPage myAccountPage = new MyAccountPage();
+        configurationAction.openSite();
 
-        storeMainPage.openSite();
-        storeMainPage.clickOnSignIn();
+        loginAction.clickOnSignIn();
+        loginAction.enterRegisteredEmail(email);
+        loginAction.enterPassword(password);
+        loginAction.clickOnSubmitLogin();
+        loginAction.checkAccountIsCreated();
+        loginAction.clickOnSignOut();
+    }
+    @Test(dataProvider = TESTDATA2, dataProviderClass = DataProviderLogin.class)
+    private void userSignIn2(final String email, final String password) {
 
-        authenticationPage.enterRegisteredEmail(email);
-        authenticationPage.enterPassword(password);
-        authenticationPage.clickOnSubmitLogin();
+        configurationAction.openSite();
 
-        myAccountPage.checkAccountIsCreated();
-        myAccountPage.checkFirstAndLastName("Kate Cherkashyna");
-
-        storeMainPage.clickOnSignOut();
+        loginAction.clickOnSignIn();
+        loginAction.enterRegisteredEmail(email);
+        loginAction.enterPassword(password);
+        loginAction.clickOnSubmitLogin();
+        loginAction.checkAccountIsCreated();
+        loginAction.clickOnSignOut();
     }
 }

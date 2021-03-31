@@ -13,7 +13,7 @@ public class DataProviderCreateAccount {
     @DataProvider(name = "DataProvider1")
     public static Object[][] setUserData1() {
         return new Object[][]{
-                {"a@testemail115.com", "John", "Wick", "abcde", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567"},
+                {"a@testemail115.com", "John", "Wick", "qawsedrftgyhu", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567"},
                 {"000111222333452@gmail.com", "A", "B", "1234567890", "D", "E", "Wyoming", "11111", "United States", "3"},
                 {"kkkkk!#$%&0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678@gmai.com", "First-Name-AAAAAAAAAAAAAAAAAAAAA", "Last-Name-BBBBBBBBBBBBBBBBBBBBBB", "password_1234567890123456!@#$%&+", "Address#&(,./-;'\012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", "City&-0123456789012345678901234567890123456789012345678901234567", "Texas", "09876", "United States", "0123456789-0123456789-0123456789"},
         };
@@ -22,7 +22,7 @@ public class DataProviderCreateAccount {
     @DataProvider(name = "DataProvider2")
     public static Object[][] setUserData2() {
         return new Object[][]{
-                {"a@testemail117.com", "John", "Wick", "abcde", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567", "Jack", "Doe", "Jack's address"},
+                {"a@testemail117.com", "John", "Wick", "qawsedrftgyhu", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567", "Jack", "Doe", "Jack's address"},
                 {"000111222333454@gmail.com", "A", "B", "1234567890", "D", "E", "Wyoming", "11111", "United States", "3", "C", "D", "E"},
                 {"mmmmm!#$%&0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678@gmai.com", "First-Name-AAAAAAAAAAAAAAAAAAAAA", "Last-Name-BBBBBBBBBBBBBBBBBBBBBB", "password_1234567890123456!@#$%&+", "Address#&(,./-;'\012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", "City&-0123456789012345678901234567890123456789012345678901234567", "Texas", "09876", "United States", "0123456789-0123456789-0123456789", "First-Name-CCCCCCCCCCCCCCCCCCCCC", "Last-Name-DDDDDDDDDDDDDDDDDDDDDD", "Address_Alias_!@#$%&.,()_1234567"},
         };
@@ -87,4 +87,6 @@ public class DataProviderCreateAccount {
                 {"test@email51.com", "John", "Wick", "abcde", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567", "", "", "Address_Alias_!@#$%&.,()_12345678"}
         };
     }
+
+
 }

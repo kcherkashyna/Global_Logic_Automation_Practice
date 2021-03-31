@@ -9,7 +9,6 @@ import pages.StoreMainPage;
 import static com.codeborne.selenide.Condition.*;
 
 public class CreateAccountAction {
-
     private final StoreMainPage smp;
     private final AuthenticationPage ap;
     private final CreateAccountPage cap;
@@ -53,6 +52,7 @@ public class CreateAccountAction {
     public void chooseState(final String state) {
         cap.getStateDropDownList().should(exist).selectOption(state);
     }
+
     public void enterPostcode(final String postcode) {
         cap.getPostcodeField().shouldBe(Condition.visible).setValue(postcode);
     }
@@ -64,17 +64,14 @@ public class CreateAccountAction {
     }
 
     public void enterFirstName2(final String firstName2) {
-        //cap.getFirstNameField2().shouldBe(Condition.visible).clear();
         cap.getFirstNameField2().shouldBe(Condition.visible).setValue(firstName2);
     }
 
     public void enterLastName2(final String lastName2) {
-        //cap.getLastNameField2().shouldBe(Condition.visible).clear();
         cap.getLastNameField2().shouldBe(Condition.visible).setValue(lastName2);
     }
 
     public void enterAddressAlias(final String addressAlias) {
-        //cap.getAddressAliasField().shouldBe(Condition.visible).clear();
         cap.getAddressAliasField().shouldBe(Condition.visible).setValue(addressAlias);
     }
 
@@ -92,7 +89,7 @@ public class CreateAccountAction {
     }
 
     public void clickOnSignOut() {
-        smp.clickOnSignOutButton().shouldBe(exist).click();
+        smp.getSignOutButton().shouldBe(exist).click();
     }
 
     //actions for optional fields

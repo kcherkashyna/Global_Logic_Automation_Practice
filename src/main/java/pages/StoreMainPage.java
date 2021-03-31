@@ -16,7 +16,7 @@ public class StoreMainPage {
         return $(".login");
     }
 
-    public SelenideElement clickOnSignOutButton(){
+    public SelenideElement getSignOutButton(){
         return $(".logout");
     }
 

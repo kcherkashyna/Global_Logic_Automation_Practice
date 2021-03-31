@@ -9,9 +9,6 @@ Page classes shall contain getters for SelenideElements and ElementCollection
 */
 public class AuthenticationPage {
 
-    public AuthenticationPage() {
-    }
-
 //Method parameters should be always final
 //    public void enterEmail(final String email) {
 //        $("#email_create").setValue(email);
@@ -22,7 +19,6 @@ public class AuthenticationPage {
 //        $("#SubmitCreate").click();
 //    }
 
-
     public SelenideElement getEmailField(){
         return $("#email_create");
     }
@@ -31,16 +27,16 @@ public class AuthenticationPage {
         return $("#SubmitCreate");
     }
 
-    public void enterRegisteredEmail(String registeredEmail) {
-        $("#email").setValue(registeredEmail);
+    public SelenideElement getRegisteredEmailField(){
+        return $("#email");
     }
 
-    public void enterPassword(String password) {
-        $("#passwd").setValue(password);
+    public SelenideElement getPasswordField(){
+        return $("#passwd");
     }
 
-    public void clickOnSubmitLogin() {
-        $("#SubmitLogin").click();
+    public SelenideElement getSubmitLoginButton(){
+        return $("#SubmitLogin");
     }
 
 }

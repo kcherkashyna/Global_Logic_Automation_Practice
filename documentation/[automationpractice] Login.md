@@ -10,7 +10,7 @@ Functional Requirements: user should be able to login in to app
 
 | # | EmailAddress | Password |
 | - | ------------ | -------- |
-| 1 | a@testemail.com | ebcde |
+| 1 | a@testemail.com | qawsedrftgyhu |
 | 2 | 000111222333@gmail.com | 1234567890 |
 | 3 | abcde!#$%&0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678@gmai.com | password_1234567890123456!@#$%&+ |
 
