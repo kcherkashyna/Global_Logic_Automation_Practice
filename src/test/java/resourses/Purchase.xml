@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Purchase">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/kateryna.cherkashyna/IdeaProjects/Global_Logic_automationpractice">
+        <classes>
+            <class name="test.AddProductToCartTest">
+                <methods>
+                    <include name="addToCart"/>
+                </methods>
+            </class>
+            <class name="test.ChooseAndBuyTest">
+                <methods>
+                    <include name="chooseAndBuy1"/>
+                    <include name="chooseAndBuy2"/>
+                </methods>
+            </class>
+            <class name="test.SearchForProductTest">
+                <methods>
+                    <include name="searchForProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

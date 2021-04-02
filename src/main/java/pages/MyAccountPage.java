@@ -17,4 +17,12 @@ public class MyAccountPage {
         return $x("//*[@class='account']/span");
     }
 
+    public SelenideElement getMyNameLinkText(){
+        return $(".account");
+    }
+
+    public SelenideElement getMyOrderHistoryButton(){
+        return $x("//*[text()='Order history and details']");
+    }
+
 }

@@ -1,15 +1,44 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class MyCartPage {
 
+    public SelenideElement getProceedToCheckout1Button() {
+        return $x("//*[@title='Proceed to checkout']");
+    }
+
+    public SelenideElement getProceedToCheckout2Button() {
+        return $x("//*[contains(@class,'cart_navigation')]//*[@title='Proceed to checkout']");
+    }
+
+    public SelenideElement getProceedToCheckout3Button() {
+        return $x("//*[@name='processAddress']");
+    }
+
+    public SelenideElement getIAgreeCheckbox() {
+        return $("#cgv");
+    }
+
+    public SelenideElement getProceedToCheckout4Button() {
+        return $x("//*[@name='processCarrier']");
+    }
+
+    public SelenideElement getPayByBankWireButton() {
+        return $x("//*[@title='Pay by bank wire']");
+    }
+
+    public SelenideElement getIConfirmMyOrderButton() {
+        return $x("//*[text()='I confirm my order']");
+    }
+
     public void clickOnContinueShopping() {
-        $(By.xpath("//*[@title='Continue shopping']")).click();
+        $x("//*[@title='Continue shopping']").shouldBe(enabled).click();
     }
 
     public void checkRightProductIsAdded() {
