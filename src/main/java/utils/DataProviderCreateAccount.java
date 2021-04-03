@@ -5,13 +5,13 @@ import org.testng.annotations.DataProvider;
 //Data provider should not be in test package
 public class DataProviderCreateAccount {
 
-    public static final String TESTDATA1 = "DataProvider1";
-    public static final String TESTDATA2 = "DataProvider2";
-    public static final String TESTDATA3 = "DataProvider3";
-    public static final String TESTDATA4 = "DataProvider4";
+    public static final String TEST_DATA_POSITIVE_REQUIRED_FIELDS = "PositiveRequiredFields";
+    public static final String TEST_DATA_POSITIVE_CHANGED_DEFAULT_FIELDS = "PositiveChangedDefaultFields";
+    public static final String TEST_DATA_NEGATIVE_REQUIRED_FIELDS = "NegativeRequiredFields";
+    public static final String TEST_DATA_NEGATIVE_CHANGED_DEFAULT_FIELDS = "NegativeChangedDefaultFields";
 
-    @DataProvider(name = "DataProvider1")
-    public static Object[][] setUserData1() {
+    @DataProvider(name = "PositiveRequiredFields")
+    public static Object[][] setUserDataWithRequiredFields() {
         return new Object[][]{
                 {"a@testemail115.com", "John", "Wick", "qawsedrftgyhu", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567"},
                 {"000111222333452@gmail.com", "A", "B", "1234567890", "D", "E", "Wyoming", "11111", "United States", "3"},
@@ -19,8 +19,8 @@ public class DataProviderCreateAccount {
         };
     }
 
-    @DataProvider(name = "DataProvider2")
-    public static Object[][] setUserData2() {
+    @DataProvider(name = "PositiveChangedDefaultFields")
+    public static Object[][] setUserDataWithChangedDefaultFields() {
         return new Object[][]{
                 {"a@testemail117.com", "John", "Wick", "qawsedrftgyhu", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567", "Jack", "Doe", "Jack's address"},
                 {"000111222333454@gmail.com", "A", "B", "1234567890", "D", "E", "Wyoming", "11111", "United States", "3", "C", "D", "E"},
@@ -28,8 +28,8 @@ public class DataProviderCreateAccount {
         };
     }
 
-    @DataProvider(name = "DataProvider3")
-    public static Object[][] setUserData3() {
+    @DataProvider(name = "NegativeRequiredFields")
+    public static Object[][] setUserDataWithInvalidRequiredFields() {
         return new Object[][]{
                 {"", "John", "Wick", "abcde", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567"},
                 {"test@email5.com", "", "", "", "", "", "", "", "United States", ""},
@@ -70,8 +70,8 @@ public class DataProviderCreateAccount {
         };
     }
 
-    @DataProvider(name = "DataProvider4")
-    public static Object[][] setUserData4() {
+    @DataProvider(name = "NegativeChangedDefaultFields")
+    public static Object[][] setUserDataWithInvalidDefaultFields() {
         return new Object[][]{
                 {"test@email40.com", "John", "Wick", "abcde", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567", "", "John", "Wick"},
                 {"test@email41.com", "John", "Wick", "abcde", "Fifth Avenue", "Manhattan", "New York", "12345", "United States", "+380931234567", " ", "John", "Wick"},

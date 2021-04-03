@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MyAccountPage {
-
     //Is good to have matcher method in action class too
     public SelenideElement getMyAccountText(){
         return $(".page-heading");

@@ -5,11 +5,11 @@ import org.testng.annotations.DataProvider;
 //Data provider should not be in test package
 public class DataProviderLogin {
 
-    public static final String TESTDATA1 = "DataProvider1";
-    public static final String TESTDATA2 = "DataProvider2";
+    public static final String TEST_DATA_POSITIVE = "DataProviderPositive";
+    public static final String TEST_DATA_NEGATIVE = "DataProviderNegative";
 
-    @DataProvider(name = "DataProvider1")
-    public static Object[][] setUserData1() {
+    @DataProvider(name = "DataProviderPositive")
+    public static Object[][] setUserDataPositive() {
         return new Object[][]{
                 {"a@testemail.com", "qawsedrftgyhu"},
                 {"000111222333@gmail.com", "1234567890"},
@@ -17,8 +17,8 @@ public class DataProviderLogin {
         };
     }
 
-    @DataProvider(name = "DataProvider2")
-    public static Object[][] setUserData2() {
+    @DataProvider(name = "DataProviderNegative")
+    public static Object[][] setUserDataNegative() {
         return new Object[][]{
                 {"", ""},
                 {"", "abcde"},
