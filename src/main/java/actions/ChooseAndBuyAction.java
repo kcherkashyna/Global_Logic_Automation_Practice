@@ -7,16 +7,14 @@ import static com.codeborne.selenide.Condition.*;
 
 public class ChooseAndBuyAction {
     private final StoreMainPage smp;
-    private final AuthenticationPage ap;
-    private final PrintedShiffonDressPage psdp;
+    private final ProductPage pcdp;
     private final MyCartPage mcp;
     private final MyAccountPage map;
     private final OrderHistoryPage ohp;
 
     public ChooseAndBuyAction() {
         smp = new StoreMainPage();
-        ap = new AuthenticationPage();
-        psdp = new PrintedShiffonDressPage();
+        pcdp = new ProductPage();
         mcp = new MyCartPage();
         map = new MyAccountPage();
         ohp = new OrderHistoryPage();
@@ -27,23 +25,23 @@ public class ChooseAndBuyAction {
     }
 
     public void clickOnProduct(){
-        smp.getPrintedChiffonDress().should(exist).click();
+        smp.getPrintedChiffonDressPicture().should(exist).click();
     }
 
     public void addToCart() {
-        psdp.getAddToCartButton().shouldBe(enabled).click();
+        pcdp.getAddToCartButton().shouldBe(enabled).click();
     }
 
-    public void proceedToCheckout1() {
-        mcp.getProceedToCheckout1Button().shouldBe(enabled).click();
+    public void proceedToCheckoutFirst() {
+        mcp.getProceedToCheckoutOneButton().shouldBe(enabled).click();
     }
 
-    public void proceedToCheckout2() {
-        mcp.getProceedToCheckout2Button().shouldBe(enabled).click();
+    public void proceedToCheckoutSecond() {
+        mcp.getProceedToCheckoutSecondButton().shouldBe(enabled).click();
     }
 
-    public void proceedToCheckout3() {
-        mcp.getProceedToCheckout3Button().shouldBe(enabled).click();
+    public void proceedToCheckoutThird() {
+        mcp.getProceedToCheckoutThirdButton().shouldBe(enabled).click();
     }
 
     public void checkIAgree() {
@@ -51,8 +49,8 @@ public class ChooseAndBuyAction {
         mcp.getIAgreeCheckbox().shouldBe(checked);
     }
 
-    public void proceedToCheckout4() {
-        mcp.getProceedToCheckout4Button().shouldBe(enabled).click();
+    public void proceedToCheckoutForth() {
+        mcp.getProceedToCheckoutForthButton().shouldBe(enabled).click();
     }
 
     public void choosePayByBankWire() {

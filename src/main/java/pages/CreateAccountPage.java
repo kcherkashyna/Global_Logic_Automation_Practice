@@ -41,11 +41,11 @@ public class CreateAccountPage {
         return $("#phone_mobile");
     }
 
-    public SelenideElement getFirstNameField2(){
+    public SelenideElement getFirstNameYourAddressField(){
         return $(".form-control#firstname");
     }
 
-    public SelenideElement getLastNameField2(){
+    public SelenideElement getLastNameYourAddressField(){
         return $(".form-control#lastname");
     }
 
@@ -59,11 +59,11 @@ public class CreateAccountPage {
 
     //optional fields
 
-    public SelenideElement getGender1RadioButton(){
+    public SelenideElement getManGenderRadioButton(){
         return $("#id_gender1");
     }
 
-    public SelenideElement getGender2RadioButton(){
+    public SelenideElement getWomanRadioButton(){
         return $("#id_gender2");
     }
 
@@ -91,7 +91,7 @@ public class CreateAccountPage {
         return $("#company");
     }
 
-    public SelenideElement getAddress2Field(){
+    public SelenideElement getAdditionalAddressField(){
         return $("#address2");
     }
 

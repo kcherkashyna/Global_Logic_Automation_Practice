@@ -1,23 +1,21 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class MyCartPage {
 
-    public SelenideElement getProceedToCheckout1Button() {
+    public SelenideElement getProceedToCheckoutOneButton() {
         return $x("//*[@title='Proceed to checkout']");
     }
 
-    public SelenideElement getProceedToCheckout2Button() {
+    public SelenideElement getProceedToCheckoutSecondButton() {
         return $x("//*[contains(@class,'cart_navigation')]//*[@title='Proceed to checkout']");
     }
 
-    public SelenideElement getProceedToCheckout3Button() {
+    public SelenideElement getProceedToCheckoutThirdButton() {
         return $x("//*[@name='processAddress']");
     }
 
@@ -25,7 +23,7 @@ public class MyCartPage {
         return $("#cgv");
     }
 
-    public SelenideElement getProceedToCheckout4Button() {
+    public SelenideElement getProceedToCheckoutForthButton() {
         return $x("//*[@name='processCarrier']");
     }
 
@@ -37,13 +35,22 @@ public class MyCartPage {
         return $x("//*[text()='I confirm my order']");
     }
 
-    public void clickOnContinueShopping() {
-        $x("//*[@title='Continue shopping']").shouldBe(enabled).click();
+    public SelenideElement getContinueShoppingButton() {
+        return $x("//*[@title='Continue shopping']");
     }
 
-    public void checkRightProductIsAdded() {
+    public SelenideElement getProductNameInCartText() {
         //update locator . replace get(2)
-        $$(By.xpath("//*[@class='product-name']//*[contains(@href,'id_product')]")).get(2).shouldHave(text("Printed Chiffon Dress"));
-        $(".cart_ref").shouldHave(text("demo_7"));
+        return $x("//*[@class='cart_description']//*[@class='product-name']");
     }
+
+    public SelenideElement getProductModelInCartText() {
+        return $(".cart_ref");
+    }
+
+    public SelenideElement getAddedProductPrice() {
+        $x("//*[@title='View my shopping cart']").scrollTo().hover();
+        return $x("//*[@class='cart-info']//*[@class='price']");
+    }
+
 }

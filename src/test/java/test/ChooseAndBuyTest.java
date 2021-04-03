@@ -7,61 +7,66 @@ import org.testng.annotations.Test;
 
 public class ChooseAndBuyTest {
 
-  ConfigurationAction configurationAction = new ConfigurationAction();
-  LoginAction loginAction = new LoginAction();
-  ChooseAndBuyAction chooseAndBuyAction = new ChooseAndBuyAction();
+    ConfigurationAction ca;
+    LoginAction la;
+    ChooseAndBuyAction caba;
 
-  @Test
-  public void chooseAndBuy1() {
-    configurationAction.openSite();
-    chooseAndBuyAction.clickOnProduct();
-    chooseAndBuyAction.addToCart();
-    chooseAndBuyAction.proceedToCheckout1();
-    chooseAndBuyAction.proceedToCheckout2();
-    loginAction.enterRegisteredEmail("a@testemail.com");
-    loginAction.enterPassword("qawsedrftgyhu");
-    loginAction.clickOnSubmitLogin();
-    chooseAndBuyAction.proceedToCheckout3();
-    chooseAndBuyAction.checkIAgree();
-    chooseAndBuyAction.proceedToCheckout4();
-    chooseAndBuyAction.choosePayByBankWire();
-    chooseAndBuyAction.confirmMyOrder();
+    ChooseAndBuyTest(){
+        ca = new ConfigurationAction();
+        la = new LoginAction();
+        caba = new ChooseAndBuyAction();
+    }
 
-    chooseAndBuyAction.openMyAccount();
-    chooseAndBuyAction.openMyOrderHistory();
-    chooseAndBuyAction.openMyLastOrder();
+    @Test(description = "User buys a product and than login")
+    private void buyAndLogin() {
+        ca.openSite();
+        caba.clickOnProduct();
+        caba.addToCart();
+        caba.proceedToCheckoutFirst();
+        caba.proceedToCheckoutSecond();
+        la.enterRegisteredEmail("a@testemail.com");
+        la.enterPassword("qawsedrftgyhu");
+        la.clickOnSubmitLogin();
+        caba.proceedToCheckoutThird();
+        caba.checkIAgree();
+        caba.proceedToCheckoutForth();
+        caba.choosePayByBankWire();
+        caba.confirmMyOrder();
 
-    chooseAndBuyAction.checkItemNameInOrder("Printed Chiffon Dress");
-    chooseAndBuyAction.checkTotalOrderPrice("$16.40");
-  }
+        caba.openMyAccount();
+        caba.openMyOrderHistory();
+        caba.openMyLastOrder();
 
-  @Test
-  public void chooseAndBuy2() {
-    configurationAction.openSite();
-    loginAction.clickOnSignIn();
-    loginAction.enterRegisteredEmail("a@testemail.com");
-    loginAction.enterPassword("qawsedrftgyhu");
-    loginAction.clickOnSubmitLogin();
-    chooseAndBuyAction.clickOnLogo();
+        caba.checkItemNameInOrder("Printed Chiffon Dress");
+        caba.checkTotalOrderPrice("$16.40");
+    }
 
-    chooseAndBuyAction.clickOnProduct();
-    chooseAndBuyAction.addToCart();
-    chooseAndBuyAction.proceedToCheckout1();
-    chooseAndBuyAction.proceedToCheckout2();
-    chooseAndBuyAction.proceedToCheckout3();
-    chooseAndBuyAction.checkIAgree();
-    chooseAndBuyAction.proceedToCheckout4();
-    chooseAndBuyAction.choosePayByBankWire();
-    chooseAndBuyAction.confirmMyOrder();
+    @Test(description = "User login and buys a product")
+    private void loginAndBuy() {
+        ca.openSite();
+        la.clickOnSignIn();
+        la.enterRegisteredEmail("a@testemail.com");
+        la.enterPassword("qawsedrftgyhu");
+        la.clickOnSubmitLogin();
+        caba.clickOnLogo();
 
-    chooseAndBuyAction.openMyAccount();
-    chooseAndBuyAction.openMyOrderHistory();
-    chooseAndBuyAction.openMyLastOrder();
+        caba.clickOnProduct();
+        caba.addToCart();
+        caba.proceedToCheckoutFirst();
+        caba.proceedToCheckoutSecond();
+        caba.proceedToCheckoutThird();
+        caba.checkIAgree();
+        caba.proceedToCheckoutForth();
+        caba.choosePayByBankWire();
+        caba.confirmMyOrder();
 
-    chooseAndBuyAction.checkItemNameInOrder("Printed Chiffon Dress");
-    chooseAndBuyAction.checkTotalOrderPrice("$16.40");
-  }
+        caba.openMyAccount();
+        caba.openMyOrderHistory();
+        caba.openMyLastOrder();
 
+        caba.checkItemNameInOrder("Printed Chiffon Dress");
+        caba.checkTotalOrderPrice("$16.40");
+    }
 
 }
 

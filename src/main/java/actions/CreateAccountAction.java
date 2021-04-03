@@ -14,7 +14,7 @@ public class CreateAccountAction {
     private final CreateAccountPage cap;
     private final MyAccountPage map;
 
-    public CreateAccountAction(){
+    public CreateAccountAction() {
         smp = new StoreMainPage();
         ap = new AuthenticationPage();
         cap = new CreateAccountPage();
@@ -36,15 +36,19 @@ public class CreateAccountAction {
     public void enterFirstName(final String firstName) {
         cap.getFirstNameField().shouldBe(Condition.visible).setValue(firstName);
     }
+
     public void enterLastName(final String lastName) {
         cap.getLastNameField().shouldBe(Condition.visible).setValue(lastName);
     }
+
     public void enterPassword(final String password) {
         cap.getPasswordField().shouldBe(Condition.visible).setValue(password);
     }
+
     public void enterAddress(final String address) {
         cap.getAddressField().shouldBe(Condition.visible).setValue(address);
     }
+
     public void enterCity(final String city) {
         cap.getCityField().shouldBe(Condition.visible).setValue(city);
     }
@@ -56,19 +60,21 @@ public class CreateAccountAction {
     public void enterPostcode(final String postcode) {
         cap.getPostcodeField().shouldBe(Condition.visible).setValue(postcode);
     }
+
     public void chooseCountry(final String country) {
         cap.getCountryDropDownList().should(exist).selectOption(country);
     }
+
     public void enterMobilePhone(final String mobilePhone) {
         cap.getMobilePhoneField().shouldBe(Condition.visible).setValue(mobilePhone);
     }
 
-    public void enterFirstName2(final String firstName2) {
-        cap.getFirstNameField2().shouldBe(Condition.visible).setValue(firstName2);
+    public void enterFirstNameYourAddress(final String firstName2) {
+        cap.getFirstNameYourAddressField().shouldBe(Condition.visible).setValue(firstName2);
     }
 
-    public void enterLastName2(final String lastName2) {
-        cap.getLastNameField2().shouldBe(Condition.visible).setValue(lastName2);
+    public void enterLastNameYourAddress(final String lastName2) {
+        cap.getLastNameYourAddressField().shouldBe(Condition.visible).setValue(lastName2);
     }
 
     public void enterAddressAlias(final String addressAlias) {
@@ -95,21 +101,21 @@ public class CreateAccountAction {
     //actions for optional fields
 
     public void chooseMaleGender() {
-        cap.getGender1RadioButton().should(exist).shouldNotBe(selected).click();
-        cap.getGender1RadioButton().shouldBe(selected);
+        cap.getManGenderRadioButton().should(exist).shouldNotBe(selected).click();
+        cap.getManGenderRadioButton().shouldBe(selected);
     }
 
     public void chooseFemaleGender() {
-        cap.getGender2RadioButton().should(exist).shouldNotBe(selected).click();
-        cap.getGender2RadioButton().shouldBe(selected);
+        cap.getWomanRadioButton().should(exist).shouldNotBe(selected).click();
+        cap.getWomanRadioButton().shouldBe(selected);
     }
 
     public void chooseDayOfBirth(final String dayOfBirth) {
         cap.getDayOfBirthDropDownList().should(exist).selectOptionByValue(dayOfBirth);
     }
 
-    public void chooseMonthOfBirth(String monthOfBirth) {
-        cap.getMonthOfBirthDropDownList().selectOptionContainingText(monthOfBirth);
+    public void chooseMonthOfBirth(final String monthOfBirth) {
+        cap.getMonthOfBirthDropDownList().should(exist).selectOptionContainingText(monthOfBirth);
     }
 
     public void chooseYearOfBirth(final String yearOfBirth) {
@@ -130,8 +136,8 @@ public class CreateAccountAction {
         cap.getCompanyField().shouldBe(Condition.visible).setValue(company);
     }
 
-    public void enterAddress2(final String address2) {
-        cap.getAddress2Field().shouldBe(Condition.visible).setValue(address2);
+    public void enterAdditionalAddress(final String address) {
+        cap.getAdditionalAddressField().shouldBe(Condition.visible).setValue(address);
     }
 
     public void enterAddInfo(final String addInfo) {

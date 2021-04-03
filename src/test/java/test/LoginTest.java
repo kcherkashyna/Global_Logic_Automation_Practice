@@ -5,36 +5,38 @@ import actions.LoginAction;
 import org.testng.annotations.Test;
 import utils.DataProviderLogin;
 
-import static utils.DataProviderLogin.TESTDATA1;
-import static utils.DataProviderLogin.TESTDATA2;
+import static utils.DataProviderLogin.TEST_DATA_POSITIVE;
+import static utils.DataProviderLogin.TEST_DATA_NEGATIVE;
 
 public class LoginTest {
+    private final ConfigurationAction ca;
+    private final LoginAction la;
 
-    ConfigurationAction configurationAction = new ConfigurationAction();
-    LoginAction loginAction = new LoginAction();
-
-    @Test(dataProvider = TESTDATA1, dataProviderClass = DataProviderLogin.class)
-    private void userSignIn1(final String email, final String password) {
-
-        configurationAction.openSite();
-
-        loginAction.clickOnSignIn();
-        loginAction.enterRegisteredEmail(email);
-        loginAction.enterPassword(password);
-        loginAction.clickOnSubmitLogin();
-        loginAction.checkAccountIsCreated();
-        loginAction.clickOnSignOut();
+    LoginTest(){
+        ca = new ConfigurationAction();
+        la = new LoginAction();
     }
-    @Test(dataProvider = TESTDATA2, dataProviderClass = DataProviderLogin.class)
-    private void userSignIn2(final String email, final String password) {
 
-        configurationAction.openSite();
-
-        loginAction.clickOnSignIn();
-        loginAction.enterRegisteredEmail(email);
-        loginAction.enterPassword(password);
-        loginAction.clickOnSubmitLogin();
-        loginAction.checkAccountIsCreated();
-        loginAction.clickOnSignOut();
+    @Test(description = "User should be able to login in to app", dataProvider = TEST_DATA_POSITIVE, dataProviderClass = DataProviderLogin.class)
+    private void userSignInWithValidCredentials(final String email, final String password) {
+        ca.openSite();
+        la.clickOnSignIn();
+        la.enterRegisteredEmail(email);
+        la.enterPassword(password);
+        la.clickOnSubmitLogin();
+        la.checkAccountIsCreated();
+        la.clickOnSignOut();
     }
+
+    @Test(description = "User tries to login with invalid credentials", dataProvider = TEST_DATA_NEGATIVE, dataProviderClass = DataProviderLogin.class)
+    private void userSignInWithInvalidCredentials(final String email, final String password) {
+        ca.openSite();
+        la.clickOnSignIn();
+        la.enterRegisteredEmail(email);
+        la.enterPassword(password);
+        la.clickOnSubmitLogin();
+        la.checkAccountIsCreated();
+        la.clickOnSignOut();
+    }
+
 }
