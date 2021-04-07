@@ -44,6 +44,7 @@ public class AuthenticationTest {
 
     @Test
     public void checkUserName() {
+        $x("//*[contains(@class, 'dropdown-login')]//*[@id='dropdownCurrency']").shoudHave(text("John"));
         given().when().then().body(hasXPath("//*[contains(@class, 'dropdown-login')]//*[@id='dropdownCurrency']", containsString("John")));
     }
 
