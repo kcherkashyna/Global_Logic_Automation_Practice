@@ -7,38 +7,38 @@ import pages.StoreMainPage;
 import static com.codeborne.selenide.Condition.*;
 
 public class SearchForProductAction {
-    private final StoreMainPage smp;
-    private final ProductPage pp;
+    private final StoreMainPage storeMainPage;
+    private final ProductPage productPage;
 
     public SearchForProductAction() {
-        smp = new StoreMainPage();
-        pp = new ProductPage();
+        storeMainPage = new StoreMainPage();
+        productPage = new ProductPage();
     }
 
     public void searchForProductByEnter(final String product) {
-        smp.getSearchField().shouldBe(Condition.visible).setValue(product).pressEnter();
+        storeMainPage.getSearchField().shouldBe(Condition.visible).setValue(product).pressEnter();
     }
 
     public void checkRightProductIsFound(final String productName) {
-        pp.getFoundProductNameText().shouldBe(Condition.visible).shouldHave(text(productName));
+        productPage.getFoundProductNameText().shouldBe(Condition.visible).shouldHave(text(productName));
     }
 
     public void searchForProductByMagnifer(final String product) {
-        smp.getSearchField().shouldBe(Condition.visible).setValue(product);
-        smp.getSubmitSearchButton().shouldBe(enabled).click();
+        storeMainPage.getSearchField().shouldBe(Condition.visible).setValue(product);
+        storeMainPage.getSubmitSearchButton().shouldBe(enabled).click();
     }
 
     public void searchForProductByDropDownList(final String product) {
-        smp.getSearchField().shouldBe(Condition.visible).setValue(product);
-        smp.getDropDownListLinkText().first().shouldBe(visible).click();
+        storeMainPage.getSearchField().shouldBe(Condition.visible).setValue(product);
+        storeMainPage.getDropDownListLinkText().first().shouldBe(visible).click();
     }
 
     public void checkRightProductIsFoundInList(final String productName) {
-        pp.getProductNameText().shouldBe(Condition.visible).shouldHave(text(productName));
+        productPage.getProductNameText().shouldBe(Condition.visible).shouldHave(text(productName));
     }
 
     public void checkErrorTextIsPresent(final String errorText) {
-        smp.getErrorText(errorText).shouldBe(Condition.visible);
+        storeMainPage.getErrorText(errorText).shouldBe(Condition.visible);
     }
 
 }

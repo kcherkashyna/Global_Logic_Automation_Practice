@@ -9,111 +9,163 @@ import pages.StoreMainPage;
 import static com.codeborne.selenide.Condition.*;
 
 public class AddProductToCartAction {
-    private final StoreMainPage smp;
-    private final ProductPage pp;
-    private final MyCartPage mcp;
+    private final StoreMainPage storeMainPage;
+    private final ProductPage productPage;
+    private final MyCartPage myCartPage;
+    private final LoginAction loginAction;
 
     public AddProductToCartAction() {
-        smp = new StoreMainPage();
-        pp = new ProductPage();
-        mcp = new MyCartPage();
+        storeMainPage = new StoreMainPage();
+        productPage = new ProductPage();
+        myCartPage = new MyCartPage();
+        loginAction = new LoginAction();
     }
 
-    //Test methods should starts from shouldBeAble
     public void clickOnPrintedChiffonDress() {
-        smp.getPrintedChiffonDressPicture().should(exist).click();
+        storeMainPage.getPrintedChiffonDressPicture().should(exist).click();
     }
 
     public void checkRightProductIsChosen(final String name, final String model) {
-        pp.getProductNameText().shouldHave(text(name));
-        pp.getProductModelText().shouldHave(text(model));
+        productPage.getProductNameText().shouldHave(text(name));
+        productPage.getProductModelText().shouldHave(text(model));
     }
 
     public void clickAddToCart() {
-        pp.getAddToCartButton().shouldBe(enabled).click();
+        productPage.getAddToCartButton().shouldBe(enabled).click();
     }
 
     public void clickOnContinueShopping() {
-        mcp.getContinueShoppingButton().shouldBe(enabled).click();
+        myCartPage.getContinueShoppingButton().shouldBe(enabled).click();
     }
 
     public void viewMyShoppingCart() {
-        smp.getMyShoppingCartButton().shouldBe(enabled).click();
+        storeMainPage.getMyShoppingCartButton().shouldBe(enabled).click();
     }
 
     public void checkRightProductIsInCart(final String name, final String model) {
-        mcp.getProductNameInCartText().shouldHave(text(name));
-        mcp.getProductModelInCartText().shouldHave(text(model));
+        viewMyShoppingCart();
+        myCartPage.getProductNameInCartText().shouldHave(text(name));
+        myCartPage.getProductModelInCartText().shouldHave(text(model));
     }
 
     public void openWomenCatalog() {
-        smp.getWomenLinkText().shouldBe(visible).click();
+        storeMainPage.getWomenLinkText().shouldBe(visible).click();
     }
 
     public void clickOnHiddenAddToCartButton() {
-        pp.getHiddenAddProductToCartButton().waitUntil(appear, 8000).click();
+        productPage.getHiddenAddProductToCartButton().waitUntil(appear, 8000).click();
     }
 
     public void checkProductPrice(final String price) {
-        pp.getProductPriceText().shouldHave(text(price));
+        productPage.getProductPriceText().shouldHave(text(price));
     }
 
     public void clickOnCross() {
-        pp.getCrossButton().shouldBe(enabled).click();
+        productPage.getCrossButton().shouldBe(enabled).click();
     }
 
     public void checkAddedProductPrice(final String price) {
-        mcp.getAddedProductPrice().shouldBe(visible).shouldHave(text(price));
+        viewMyShoppingCart();
+        myCartPage.getAddedProductPrice().shouldBe(visible).shouldHave(text(price));
     }
 
     public void openDressesCatalog() {
-        smp.getDressesLinkText().should(exist).click();
+        storeMainPage.getDressesLinkText().should(exist).click();
     }
 
     public void clickOnHiddenMoreButton() {
-        pp.getHiddenMoreButton().shouldBe(visible).click();
+        productPage.getHiddenMoreButton().shouldBe(visible).click();
     }
 
     public void openTShirtsCatalog() {
-        smp.getTShirtsLinkText().shouldBe(visible).click();
+        storeMainPage.getTShirtsLinkText().shouldBe(visible).click();
     }
 
     public void clickOnColorButton() {
-        pp.getColorButton().shouldBe(enabled).click();
+        productPage.getColorButton().shouldBe(enabled).click();
     }
 
     public void openTopsCatalog() {
-        smp.getTopsLinkText().shouldBe(visible).click();
+        storeMainPage.getTopsLinkText().shouldBe(visible).click();
     }
 
     public void clickOnBlouse() {
-        pp.getBlousePicture().shouldBe(enabled).click();
+        productPage.getBlousePicture().shouldBe(enabled).click();
     }
 
     public void clickOnPlus() {
-        pp.getPlusButton().shouldBe(enabled).doubleClick();
+        productPage.getPlusButton().shouldBe(enabled).doubleClick();
     }
 
     public void clickOnMinus() {
-        pp.getMinusButton().shouldBe(enabled).click();
+        productPage.getMinusButton().shouldBe(enabled).click();
     }
 
     public void chooseSize(final String size) {
-        pp.getSizeDropDownList().should(exist).selectOptionContainingText(size);
+        productPage.getSizeDropDownList().should(exist).selectOptionContainingText(size);
     }
 
     public void chooseWhiteColor() {
-        pp.getWhiteColorButton().should(exist).click();
+        productPage.getWhiteColorButton().should(exist).click();
     }
 
     public void checkRightProductsAreInCart(final String firstProduct, final String secondProduct, final String thirdProduct) {
-        pp.getProductNamesText().shouldHave(CollectionCondition.itemWithText(firstProduct));
-        pp.getProductNamesText().shouldHave(CollectionCondition.itemWithText(secondProduct));
-        pp.getProductNamesText().shouldHave(CollectionCondition.itemWithText(thirdProduct));
+        viewMyShoppingCart();
+        productPage.getProductNamesText().shouldHave(CollectionCondition.itemWithText(firstProduct));
+        productPage.getProductNamesText().shouldHave(CollectionCondition.itemWithText(secondProduct));
+        productPage.getProductNamesText().shouldHave(CollectionCondition.itemWithText(thirdProduct));
     }
 
     public void clickOnLogo() {
-        smp.getLogoPicture().shouldBe(Condition.visible).click();
+        storeMainPage.getLogoPicture().shouldBe(Condition.visible).click();
     }
 
+    public void addPrintedChiffonDressToCart() {
+        clickOnPrintedChiffonDress();
+        checkRightProductIsChosen("Printed Chiffon Dress", "demo_7");
+        clickAddToCart();
+        clickOnContinueShopping();
+    }
+
+    public void addPrintedDressModelThirdToCart() {
+        openWomenCatalog();
+        clickOnHiddenAddToCartButton();
+        checkProductPrice("$26.00");
+        clickOnCross();
+    }
+
+    public void addPrintedSummerDressModelSixthToCart() {
+        openDressesCatalog();
+        clickOnHiddenMoreButton();
+        checkRightProductIsChosen("Printed Summer Dress", "demo_6");
+        clickAddToCart();
+        clickOnContinueShopping();
+    }
+
+    public void addTShirtToCart() {
+        openTShirtsCatalog();
+        clickOnColorButton();
+        checkRightProductIsChosen("Faded Short Sleeve T-shirts", "demo_1");
+        clickAddToCart();
+        clickOnCross();
+    }
+
+    public void addBlouseToCart() {
+        openTopsCatalog();
+        clickOnBlouse();
+        checkRightProductIsChosen("Blouse", "demo_2");
+        clickOnPlus();
+        clickOnMinus();
+        chooseSize("M");
+        chooseWhiteColor();
+        clickAddToCart();
+        clickOnContinueShopping();
+    }
+
+    public void login() {
+        loginAction.clickOnSignIn();
+        loginAction.enterRegisteredEmail("a@testemail.com");
+        loginAction.enterPassword("qawsedrftgyhu");
+        loginAction.clickOnSubmitLogin();
+    }
 }
