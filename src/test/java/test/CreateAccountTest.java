@@ -1,364 +1,222 @@
 package test;
 
-import actions.ConfigurationAction;
 import actions.CreateAccountAction;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import utils.Configuration;
 import utils.DataProviderCreateAccount;
+import utils.Helper;
+import utils.User;
 
 import static utils.DataProviderCreateAccount.*;
 
 public class CreateAccountTest {
-    private final ConfigurationAction ca;
-    private final CreateAccountAction caa;
-    private final CreateAccountTest cat;
+    private Configuration configuration;
+    private CreateAccountAction createAccountAction;
+    private Helper helper;
+    private User userMale;
+    private User userFemale;
+    private User mark;
+    private User james;
+    private User daniel;
+    private User christopher;
+    private User edward;
+    private User robert;
+    private User harry;
 
-    public CreateAccountTest() {
-        ca = new ConfigurationAction();
-        caa = new CreateAccountAction();
-        cat = new CreateAccountTest();
+    @BeforeMethod
+    private void openAuthenticationPage() {
+        configuration = new Configuration();
+        createAccountAction = new CreateAccountAction();
+        helper = new Helper();
+        configuration.openSite();
+        createAccountAction.clickOnSignIn();
+
+        userMale = new User();
+        userMale.setEmail(helper.generateEmail());
+        userMale.setFirstName("John");
+        userMale.setLastName("Doe");
+        userMale.setAddress("Olvera Street");
+        userMale.setCity("Los Angeles");
+        userMale.setState("California");
+        userMale.setPostcode("54321");
+        userMale.setCountry("United States");
+        userMale.setMobilePhone("0123456789");
+        userMale.setPassword("12345");
+        userMale.setDayOfBirth("1");
+        userMale.setMonthOfBirth("January");
+        userMale.setYearOfBirth("2021");
+        userMale.setCompany("A");
+        userMale.setAdditionalAddress("B");
+        userMale.setAdditionalInfo("C");
+        userMale.setHomePhone("9876543210");
+
+        userFemale = new User();
+        userFemale.setEmail(helper.generateEmail());
+        userFemale.setFirstName("Ann");
+        userFemale.setLastName("Taylor");
+        userFemale.setAddress("South King Street");
+        userFemale.setCity("Seattle");
+        userFemale.setState("Washington");
+        userFemale.setPostcode("77777");
+        userFemale.setCountry("United States");
+        userFemale.setMobilePhone("012-345-6789");
+        userFemale.setPassword("1qaz2wsx3edc");
+        userFemale.setDayOfBirth("31");
+        userFemale.setMonthOfBirth("December");
+        userFemale.setYearOfBirth("1900");
+        userFemale.setCompany("Company-'@#$%&().,0123456789012345678901234567890123456789012345");
+        userFemale.setAdditionalAddress("Address2#&(),./-;'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+        userFemale.setAdditionalInfo("AddInfo_!#$%&.,/('012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567801234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456780123456789012345678901234567890123456789012345678901234567890123");
+        userFemale.setHomePhone("123456789-123456789-123456789-12");
     }
 
-    @Test(description = "User creates account with filling of only required fields", dataProvider = TEST_DATA_POSITIVE_REQUIRED_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
-    private void createAccountWithRequiredFields(final String email, final String firstName, final String lastName, final String password,
-                                                 final String address, final String city, final String state,
-                                                 final String postcode, final String country, final String mobilePhone) {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail(email);
-        caa.submitEmail();
+    @Test(description = "User creates account with filling of only required fields",
+            dataProvider = TEST_DATA_POSITIVE_REQUIRED_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
+    private void createAccountWithRequiredFields(User user) {
+        createAccountAction.firstRegistrationStep(user);
+        createAccountAction.fillInRequiredFields(user);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(user);
+        createAccountAction.clickOnSignOut();
 
-        caa.enterFirstName(firstName);
-        caa.enterLastName(lastName);
-        caa.enterAddress(address);
-        caa.enterCity(city);
-        caa.chooseState(state);
-        caa.enterPostcode(postcode);
-        caa.chooseCountry(country);
-        caa.enterMobilePhone(mobilePhone);
-        caa.enterPassword(password);
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName(firstName, lastName);
-        caa.clickOnSignOut();
     }
 
-    @Test(description = "User creates account with filling of all required fields and changing default fields", dataProvider = TEST_DATA_POSITIVE_CHANGED_DEFAULT_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
-    private void createAccountWithChangingDefaultFields(final String email, final String firstName, final String lastName, final String password,
-                                                        final String address, final String city, final String state,
-                                                        final String postcode, final String country, final String mobilePhone,
-                                                        final String firstName2, final String lastName2, final String addressAlias) {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail(email);
-        caa.submitEmail();
-
-        caa.enterFirstName(firstName);
-        caa.enterLastName(lastName);
-        caa.enterAddress(address);
-        caa.enterCity(city);
-        caa.chooseState(state);
-        caa.enterPostcode(postcode);
-        caa.chooseCountry(country);
-        caa.enterMobilePhone(mobilePhone);
-        caa.enterFirstNameYourAddress(firstName2);
-        caa.enterLastNameYourAddress(lastName2);
-        caa.enterAddressAlias(addressAlias);
-        caa.enterPassword(password);
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName(firstName, lastName);
-        caa.clickOnSignOut();
+    @Test(description = "User creates account with filling of all required fields and changing default fields",
+            dataProvider = TEST_DATA_POSITIVE_CHANGED_DEFAULT_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
+    private void createAccountWithChangingDefaultFields(User user) {
+        createAccountAction.firstRegistrationStep(user);
+        createAccountAction.fillInRequiredFields(user);
+        createAccountAction.rewriteDefaultFields(user);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(user);
+        createAccountAction.clickOnSignOut();
     }
 
-    //auxiliary method
-    public void fillInRequiredFields(){
-        caa.enterFirstName("Jack");
-        caa.enterLastName("Doe");
-        caa.enterAddress("Olvera Street");
-        caa.enterCity("Los Angeles");
-        caa.chooseState("California");
-        caa.enterPostcode("54321");
-        caa.chooseCountry("United States");
-        caa.enterMobilePhone("0123456789");
-        caa.enterPassword("12345");
-    }
-
-    @Test (description = "User creates account with filling of all required and optional fields")
+    @Test(description = "User creates account with filling of all required and optional fields")
     private void createAccountWithOptionalFieldsForMan() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail60.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("1");
-        caa.chooseMonthOfBirth("January");
-        caa.chooseYearOfBirth("2021");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        createAccountAction.firstRegistrationStep(userMale);
+        createAccountAction.fillInRequiredFields(userMale);
+        createAccountAction.fillInOptionalFieldsMale(userMale);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(userMale);
     }
 
-    @Test (description = "User creates account with filling of all required and optional fields")
+    @Test(description = "User creates account with filling of all required and optional fields")
     private void createAccountWithOptionalFieldsForWoman() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail61.com");
-        caa.submitEmail();
-
-        caa.enterFirstName("Ann");
-        caa.enterLastName("Taylor");
-        caa.enterPassword("1qaz2wsx3edc");
-        caa.enterAddress("South King Street");
-        caa.enterCity("Seattle");
-        caa.chooseState("Washington");
-        caa.enterPostcode("77777");
-        caa.chooseCountry("United States");
-        caa.enterMobilePhone("012-345-6789");
-        caa.chooseFemaleGender();
-        caa.chooseDayOfBirth("31");
-        caa.chooseMonthOfBirth("December");
-        caa.chooseYearOfBirth("1900");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("Company-'@#$%&().,0123456789012345678901234567890123456789012345");
-        caa.enterAdditionalAddress("Address2#&(),./-;'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
-        caa.enterAddInfo("AddInfo_!#$%&.,/('012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567801234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456780123456789012345678901234567890123456789012345678901234567890123");
-        caa.enterHomePhoneField("123456789-123456789-123456789-12");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Ann", "Taylor");
+        createAccountAction.firstRegistrationStep(userFemale);
+        createAccountAction.fillInRequiredFields(userFemale);
+        createAccountAction.fillInOptionalFieldsFemale(userFemale);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(userFemale);
     }
 
-    @Test(description = "User tries to create account with invalid email, user tries to create account with invalid credentials", dataProvider = TEST_DATA_NEGATIVE_REQUIRED_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
-    private void createAccountWithInvalidDataInRequiredFields(final String email, final String firstName, final String lastName, final String password,
-                                                              final String address, final String city, final String state,
-                                                              final String postcode, final String country, final String mobilePhone) {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail(email);
-        caa.submitEmail();
-
-        caa.enterFirstName(firstName);
-        caa.enterLastName(lastName);
-        caa.enterAddress(address);
-        caa.enterCity(city);
-        caa.chooseState(state);
-        caa.enterPostcode(postcode);
-        caa.chooseCountry(country);
-        caa.enterMobilePhone(mobilePhone);
-        caa.enterPassword(password);
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName(firstName, lastName);
-        caa.clickOnSignOut();
+    @Test(description = "User tries to create account with invalid email, invalid credentials",
+            dataProvider = TEST_DATA_NEGATIVE_REQUIRED_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
+    private void createAccountWithInvalidDataInRequiredFields(User user) {
+        createAccountAction.firstRegistrationStep(user);
+        createAccountAction.fillInRequiredFields(user);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(user);
+        createAccountAction.clickOnSignOut();
     }
 
-    @Test(description = "User tries to create account with invalid credentials", dataProvider = TEST_DATA_NEGATIVE_CHANGED_DEFAULT_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
-    private void createAccountWithInvalidDataInDefaultFields(final String email, final String firstName, final String lastName, final String password,
-                                                             final String address, final String city, final String state,
-                                                             final String postcode, final String country, final String mobilePhone,
-                                                             final String firstName2, final String lastName2, final String addressAlias) {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail(email);
-        caa.submitEmail();
-
-        caa.enterFirstName(firstName);
-        caa.enterLastName(lastName);
-        caa.enterAddress(address);
-        caa.enterCity(city);
-        caa.chooseState(state);
-        caa.enterPostcode(postcode);
-        caa.chooseCountry(country);
-        caa.enterMobilePhone(mobilePhone);
-        caa.enterFirstNameYourAddress(firstName2);
-        caa.enterLastNameYourAddress(lastName2);
-        caa.enterAddressAlias(addressAlias);
-        caa.enterPassword(password);
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName(firstName, lastName);
-        caa.clickOnSignOut();
+    @Test(description = "User tries to create account with invalid credentials",
+            dataProvider = TEST_DATA_NEGATIVE_CHANGED_DEFAULT_FIELDS, dataProviderClass = DataProviderCreateAccount.class)
+    private void createAccountWithInvalidDataInDefaultFields(User user) {
+        createAccountAction.firstRegistrationStep(user);
+        createAccountAction.fillInRequiredFields(user);
+        createAccountAction.rewriteDefaultFields(user);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(user);
+        createAccountAction.clickOnSignOut();
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithMissedDayOfBirth() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail62.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseMonthOfBirth("January");
-        caa.chooseYearOfBirth("2021");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        mark = userMale;
+        mark.setFirstName("Mark");
+        mark.setDayOfBirth("");
+        createAccountAction.firstRegistrationStep(mark);
+        createAccountAction.fillInRequiredFields(mark);
+        createAccountAction.fillInOptionalFieldsMale(mark);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(mark);
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithMissedMonthOfBirth() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail63.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("12");
-        caa.chooseYearOfBirth("2021");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        james = userMale;
+        james.setFirstName("James");
+        james.setMonthOfBirth("");
+        createAccountAction.firstRegistrationStep(james);
+        createAccountAction.fillInRequiredFields(james);
+        createAccountAction.fillInOptionalFieldsMale(james);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(james);
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithMissedYearOfBirth() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail64.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("22");
-        caa.chooseMonthOfBirth("July");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        daniel = userMale;
+        daniel.setFirstName("Daniel");
+        daniel.setYearOfBirth("");
+        createAccountAction.firstRegistrationStep(daniel);
+        createAccountAction.fillInRequiredFields(daniel);
+        createAccountAction.fillInOptionalFieldsMale(daniel);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(daniel);
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithInvalidCompanyName() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail65.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("22");
-        caa.chooseMonthOfBirth("June");
-        caa.chooseYearOfBirth("2000");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("Company-'@#$%&().,01234567890123456789012345678901234567890123456");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        christopher = userMale;
+        christopher.setFirstName("Christopher");
+        christopher.setCompany("Company-'@#$%&().,01234567890123456789012345678901234567890123456");
+        createAccountAction.firstRegistrationStep(christopher);
+        createAccountAction.fillInRequiredFields(christopher);
+        createAccountAction.fillInOptionalFieldsMale(christopher);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(christopher);
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithInvalidAdditionalAddress() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail66.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("28");
-        caa.chooseMonthOfBirth("May");
-        caa.chooseYearOfBirth("1990");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("Address2#&(),./-;'012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        edward = userMale;
+        edward.setFirstName("Edward");
+        edward.setAdditionalAddress("Address2#&(),./-;'012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+        createAccountAction.firstRegistrationStep(edward);
+        createAccountAction.fillInRequiredFields(edward);
+        createAccountAction.fillInOptionalFieldsMale(edward);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(edward);
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithInvalidAdditionalInfo() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail67.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("19");
-        caa.chooseMonthOfBirth("April");
-        caa.chooseYearOfBirth("1999");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("AddInfo_!#$%&.,/('0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567801234567890123456789012345678901234567890123456789012345678901234");
-        caa.enterHomePhoneField("9876543210");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        robert = userMale;
+        robert.setFirstName("Robert");
+        robert.setAdditionalInfo("AddInfo_!#$%&.,/('0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567801234567890123456789012345678901234567890123456789012345678901234");
+        createAccountAction.firstRegistrationStep(robert);
+        createAccountAction.fillInRequiredFields(robert);
+        createAccountAction.fillInOptionalFieldsMale(robert);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(robert);
     }
 
-    @Test (description = "User tries to create account with invalid credentials")
+    @Test(description = "User tries to create account with invalid credentials")
     private void createAccountWithInvalidHomePhone() {
-        ca.openSite();
-        caa.clickOnSignIn();
-        caa.enterEmail("a@testemail68.com");
-        caa.submitEmail();
-
-        cat.fillInRequiredFields();
-        caa.chooseMaleGender();
-        caa.chooseDayOfBirth("10");
-        caa.chooseMonthOfBirth("September");
-        caa.chooseYearOfBirth("2002");
-        caa.checkNewsletterCheckBox();
-        caa.checkOffersCheckBox();
-        caa.enterCompany("A");
-        caa.enterAdditionalAddress("B");
-        caa.enterAddInfo("C");
-        caa.enterHomePhoneField("123456789-123456789-123456789-123");
-
-        caa.submitNewAccount();
-        caa.checkAccountIsCreated();
-        caa.checkFirstAndLastName("Jack", "Doe");
+        harry = userMale;
+        harry.setFirstName("Harry");
+        harry.setHomePhone("123456789-123456789-123456789-123");
+        createAccountAction.firstRegistrationStep(harry);
+        createAccountAction.fillInRequiredFields(harry);
+        createAccountAction.fillInOptionalFieldsMale(harry);
+        createAccountAction.submitNewAccount();
+        createAccountAction.checkCreatedAccount(harry);
     }
+
 
 }
 

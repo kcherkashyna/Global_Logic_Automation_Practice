@@ -1,8 +1,8 @@
-package actions;
+package utils;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class ConfigurationAction {
+public class Configuration {
 
     private final String BASEURL = "http://automationpractice.com/index.php";
 

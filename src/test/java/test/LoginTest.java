@@ -1,42 +1,43 @@
 package test;
 
-import actions.ConfigurationAction;
 import actions.LoginAction;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.Configuration;
 import utils.DataProviderLogin;
+import utils.User;
 
-import static utils.DataProviderLogin.TEST_DATA_POSITIVE;
 import static utils.DataProviderLogin.TEST_DATA_NEGATIVE;
+import static utils.DataProviderLogin.TEST_DATA_POSITIVE;
 
 public class LoginTest {
-    private final ConfigurationAction ca;
-    private final LoginAction la;
+    private Configuration configuration;
+    private LoginAction loginAction;
 
-    LoginTest(){
-        ca = new ConfigurationAction();
-        la = new LoginAction();
+    @BeforeTest
+    private void openSite(){
+        configuration = new Configuration();
+        loginAction = new LoginAction();
+        configuration.openSite();
     }
 
     @Test(description = "User should be able to login in to app", dataProvider = TEST_DATA_POSITIVE, dataProviderClass = DataProviderLogin.class)
-    private void userSignInWithValidCredentials(final String email, final String password) {
-        ca.openSite();
-        la.clickOnSignIn();
-        la.enterRegisteredEmail(email);
-        la.enterPassword(password);
-        la.clickOnSubmitLogin();
-        la.checkAccountIsCreated();
-        la.clickOnSignOut();
+    private void userSignInWithValidCredentials(User user) {
+        loginAction.enterEmailAndLogin(user);
+        loginAction.checkAccountIsCreated();
+
     }
 
     @Test(description = "User tries to login with invalid credentials", dataProvider = TEST_DATA_NEGATIVE, dataProviderClass = DataProviderLogin.class)
-    private void userSignInWithInvalidCredentials(final String email, final String password) {
-        ca.openSite();
-        la.clickOnSignIn();
-        la.enterRegisteredEmail(email);
-        la.enterPassword(password);
-        la.clickOnSubmitLogin();
-        la.checkAccountIsCreated();
-        la.clickOnSignOut();
+    private void userSignInWithInvalidCredentials(User user) {
+        loginAction.enterEmailAndLogin(user);
+        loginAction.checkAccountIsNotCreated();
+    }
+
+    @AfterMethod
+    private void closeSite(){
+        loginAction.clickOnSignOut();
     }
 
 }
