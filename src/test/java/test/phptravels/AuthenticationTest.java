@@ -23,7 +23,6 @@ public class AuthenticationTest {
 
     @Test
     public void checkUserName() {
-        //given().when().then().body(hasXPath("//*[contains(@class, 'dropdown-login')]//*[@id='dropdownCurrency']", containsString("John")));
         myAccountAction.checkMyAccountName();
     }
 
