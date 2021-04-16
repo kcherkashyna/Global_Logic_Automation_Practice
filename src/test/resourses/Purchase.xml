@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/kateryna.cherkashyna/IdeaProjects/Global_Logic_automationpractice">
+        <classes>
+            <class name="test.AddProductToCartTest">
+                <methods>
+                    <include name="addToCart"/>
+                    <include name="addToCartByAddToCartButton"/>
+                    <include name="addToCartByMoreButton"/>
+                    <include name="addToCartByColorButton"/>
+                    <include name="addToCartWithChangedParameters"/>
+                    <include name="addToCartSeveralProducts"/>
+                    <include name="registerUserAddSeveralProductsToCart"/>
+                </methods>
+            </class>
+            <class name="test.ChooseAndBuyTest">
+                <methods>
+                    <include name="buyAndLogin"/>
+                    <include name="loginAndBuy"/>
+                </methods>
+            </class>
+            <class name="test.SearchForProductTest">
+                <methods>
+                    <include name="searchForProductByEnter"/>
+                    <include name="searchForProductByMagnifier"/>
+                    <include name="searchForProductByDropDownList"/>
+                    <include name="searchForProductWithoutSearchText"/>
+                    <include name="searchForAbsentProduct"/>
+                    <include name="searchForMeaninglessText"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/kateryna.cherkashyna/IdeaProjects/Global_Logic_automationpractice">
+        <classes>
+            <class name="test.CreateAccountTest">
+                <methods>
+                    <include name="createAccountWithRequiredFields"/>
+                    <include name="createAccountWithChangingDefaultFields"/>
+                    <include name="createAccountWithOptionalFieldsForMan"/>
+                    <include name="createAccountWithOptionalFieldsForWoman"/>
+                    <include name="createAccountWithInvalidDataInRequiredFields"/>
+                    <include name="createAccountWithInvalidDataInDefaultFields"/>
+                    <include name="createAccountWithMissedDayOfBirth"/>
+                    <include name="createAccountWithMissedMonthOfBirth"/>
+                    <include name="createAccountWithMissedYearOfBirth"/>
+                    <include name="createAccountWithInvalidCompanyName"/>
+                    <include name="createAccountWithInvalidAdditionalAddress"/>
+                    <include name="createAccountWithInvalidAdditionalInfo"/>
+                    <include name="createAccountWithInvalidHomePhone"/>
+                </methods>
+            </class>
+            <class name="test.LoginTest">
+                <methods>
+                    <include name="userSignInWithValidCredentials"/>
+                    <include name="userSignInWithInvalidCredentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

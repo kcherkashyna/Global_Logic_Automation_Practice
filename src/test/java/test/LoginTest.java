@@ -24,14 +24,14 @@ public class LoginTest {
 
     @Test(description = "User should be able to login in to app", dataProvider = TEST_DATA_POSITIVE, dataProviderClass = DataProviderLogin.class)
     private void userSignInWithValidCredentials(User user) {
-        loginAction.enterEmailAndLogin(user);
+        loginAction.enterCredentialsAndSubmitLogin(user);
         loginAction.checkAccountIsCreated();
 
     }
 
     @Test(description = "User tries to login with invalid credentials", dataProvider = TEST_DATA_NEGATIVE, dataProviderClass = DataProviderLogin.class)
     private void userSignInWithInvalidCredentials(User user) {
-        loginAction.enterEmailAndLogin(user);
+        loginAction.enterCredentialsAndSubmitLogin(user);
         loginAction.checkAccountIsNotCreated();
     }
 

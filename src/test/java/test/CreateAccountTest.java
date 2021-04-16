@@ -23,6 +23,7 @@ public class CreateAccountTest {
     private User edward;
     private User robert;
     private User harry;
+    private static final String MALE = "M";
 
     @BeforeMethod
     private void openAuthenticationPage() {
@@ -87,7 +88,7 @@ public class CreateAccountTest {
     private void createAccountWithChangingDefaultFields(User user) {
         createAccountAction.firstRegistrationStep(user);
         createAccountAction.fillInRequiredFields(user);
-        createAccountAction.rewriteDefaultFields(user);
+        createAccountAction.rewriteDefaultFieldsAndEnterPassword(user);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(user);
         createAccountAction.clickOnSignOut();
@@ -97,7 +98,7 @@ public class CreateAccountTest {
     private void createAccountWithOptionalFieldsForMan() {
         createAccountAction.firstRegistrationStep(userMale);
         createAccountAction.fillInRequiredFields(userMale);
-        createAccountAction.fillInOptionalFieldsMale(userMale);
+        createAccountAction.fillInOptionalFields(userMale, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(userMale);
     }
@@ -106,7 +107,7 @@ public class CreateAccountTest {
     private void createAccountWithOptionalFieldsForWoman() {
         createAccountAction.firstRegistrationStep(userFemale);
         createAccountAction.fillInRequiredFields(userFemale);
-        createAccountAction.fillInOptionalFieldsFemale(userFemale);
+        createAccountAction.fillInOptionalFields(userFemale, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(userFemale);
     }
@@ -126,7 +127,7 @@ public class CreateAccountTest {
     private void createAccountWithInvalidDataInDefaultFields(User user) {
         createAccountAction.firstRegistrationStep(user);
         createAccountAction.fillInRequiredFields(user);
-        createAccountAction.rewriteDefaultFields(user);
+        createAccountAction.rewriteDefaultFieldsAndEnterPassword(user);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(user);
         createAccountAction.clickOnSignOut();
@@ -139,7 +140,7 @@ public class CreateAccountTest {
         mark.setDayOfBirth("");
         createAccountAction.firstRegistrationStep(mark);
         createAccountAction.fillInRequiredFields(mark);
-        createAccountAction.fillInOptionalFieldsMale(mark);
+        createAccountAction.fillInOptionalFields(mark, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(mark);
     }
@@ -152,7 +153,7 @@ public class CreateAccountTest {
         james.setMonthOfBirth("");
         createAccountAction.firstRegistrationStep(james);
         createAccountAction.fillInRequiredFields(james);
-        createAccountAction.fillInOptionalFieldsMale(james);
+        createAccountAction.fillInOptionalFields(james, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(james);
     }
@@ -164,7 +165,7 @@ public class CreateAccountTest {
         daniel.setYearOfBirth("");
         createAccountAction.firstRegistrationStep(daniel);
         createAccountAction.fillInRequiredFields(daniel);
-        createAccountAction.fillInOptionalFieldsMale(daniel);
+        createAccountAction.fillInOptionalFields(daniel, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(daniel);
     }
@@ -176,7 +177,7 @@ public class CreateAccountTest {
         christopher.setCompany("Company-'@#$%&().,01234567890123456789012345678901234567890123456");
         createAccountAction.firstRegistrationStep(christopher);
         createAccountAction.fillInRequiredFields(christopher);
-        createAccountAction.fillInOptionalFieldsMale(christopher);
+        createAccountAction.fillInOptionalFields(christopher, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(christopher);
     }
@@ -188,7 +189,7 @@ public class CreateAccountTest {
         edward.setAdditionalAddress("Address2#&(),./-;'012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
         createAccountAction.firstRegistrationStep(edward);
         createAccountAction.fillInRequiredFields(edward);
-        createAccountAction.fillInOptionalFieldsMale(edward);
+        createAccountAction.fillInOptionalFields(edward, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(edward);
     }
@@ -200,7 +201,7 @@ public class CreateAccountTest {
         robert.setAdditionalInfo("AddInfo_!#$%&.,/('0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567801234567890123456789012345678901234567890123456789012345678901234");
         createAccountAction.firstRegistrationStep(robert);
         createAccountAction.fillInRequiredFields(robert);
-        createAccountAction.fillInOptionalFieldsMale(robert);
+        createAccountAction.fillInOptionalFields(robert, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(robert);
     }
@@ -212,7 +213,7 @@ public class CreateAccountTest {
         harry.setHomePhone("123456789-123456789-123456789-123");
         createAccountAction.firstRegistrationStep(harry);
         createAccountAction.fillInRequiredFields(harry);
-        createAccountAction.fillInOptionalFieldsMale(harry);
+        createAccountAction.fillInOptionalFields(harry, MALE);
         createAccountAction.submitNewAccount();
         createAccountAction.checkCreatedAccount(harry);
     }

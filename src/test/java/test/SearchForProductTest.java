@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 public class SearchForProductTest {
     private Configuration configuration;
     private SearchForProductAction searchForProductAction;
+    private static final String MISSED_KEYWORD = "Please enter a search keyword";
+    private static final String ABSENT_PRODUCT_NAME = "trousers";
 
     @BeforeTest
     public void openSite() {
@@ -24,7 +26,7 @@ public class SearchForProductTest {
 
     @Test (description = "User should be able to search for a product using Magnifier button")
     private void searchForProductByMagnifier() {
-        searchForProductAction.searchForProductByMagnifer("t-shirt");
+        searchForProductAction.searchForProductByMagnifier("t-shirt");
         searchForProductAction.checkRightProductIsFound("Faded Short Sleeve T-shirts");
     }
 
@@ -37,19 +39,19 @@ public class SearchForProductTest {
     @Test (description = "User tries to search for a product without searchText")
     private void searchForProductWithoutSearchText() {
         searchForProductAction.searchForProductByEnter("");
-        searchForProductAction.checkErrorTextIsPresent("Please enter a search keyword");
+        searchForProductAction.checkErrorTextIsPresent(MISSED_KEYWORD);
     }
 
     @Test (description = "User tries to search for a product which is absent on the site")
     private void searchForAbsentProduct() {
-        searchForProductAction.searchForProductByMagnifer("trousers");
-        searchForProductAction.checkErrorTextIsPresent("No results were found for your search \"trousers\"");
+        searchForProductAction.searchForProductByMagnifier(ABSENT_PRODUCT_NAME);
+        searchForProductAction.checkNotFoundErrorTextIsPresent("No results were found for your search ", ABSENT_PRODUCT_NAME);
     }
 
     @Test (description = "User tries to search using meaningless text")
     private void searchForMeaninglessText() {
         searchForProductAction.searchForProductByEnter("");
-        searchForProductAction.checkErrorTextIsPresent("Please enter a search keyword");
+        searchForProductAction.checkErrorTextIsPresent(MISSED_KEYWORD);
     }
 
 }
