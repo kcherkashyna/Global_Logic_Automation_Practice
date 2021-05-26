@@ -24,11 +24,6 @@ public class AddProductToCartTest {
     private static final String EMAIL = "a@testemail.com";
     private static final String PASSWORD = "qawsedrftgyhu";
 
-
-
-
-
-
     @BeforeMethod
     public void openSite() {
         addProductToCartAction = new AddProductToCartAction();

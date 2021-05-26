@@ -19,9 +19,7 @@ public class MyCartPage {
         return $x("//*[@name='processAddress']");
     }
 
-    public SelenideElement getIAgreeCheckbox() {
-        return $("#cgv");
-    }
+    public SelenideElement getIAgreeCheckbox() { return $("#cgv"); }
 
     public SelenideElement getProceedToCheckoutForthButton() {
         return $x("//*[@name='processCarrier']");

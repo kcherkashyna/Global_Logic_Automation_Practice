@@ -6,9 +6,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CreateAccountPage {
 
-    public SelenideElement getFirstNameField(){
-        return $("#customer_firstname");
-    }
+    public SelenideElement getFirstNameField(){ return $("#customer_firstname"); }
+
     public SelenideElement getLastNameField(){
         return $("#customer_lastname");
     }

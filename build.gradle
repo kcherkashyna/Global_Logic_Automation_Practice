@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
-    implementation group: 'com.codeborne', name: 'selenide', version: '5.20.0'
+    implementation group: 'com.codeborne', name: 'selenide', version: '5.20.1'
     implementation group: 'org.testng', name: 'testng', version: '7.4.0'
     implementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 
